@@ -17,4 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/trajets', [TrajetController::class, 'index']);
+    Route::post('/trajets', [TrajetController::class, 'store']);
+    Route::post('/reservations', [ReservationController::class, 'store']);
+    Route::get('/notifications', [NotificationController::class, 'index']);
+});
+
+
 require __DIR__.'/auth.php';
