@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('trajets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chauffeur_id')->constrained('users');
-            $table->string('ville_depart');
-            $table->string('ville_arrivee');
+            $table->string('rue_depart');
+            $table->string('rue_arrivee');
+            $table->enum('statut', ['actif', 'terminé'])->default('actif');
             $table->dateTime('heure_depart');
             $table->integer('places_disponibles');
             $table->timestamps();

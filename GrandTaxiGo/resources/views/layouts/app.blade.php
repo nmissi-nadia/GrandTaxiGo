@@ -14,6 +14,21 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'taxi-yellow': '#f9d71c',
+                        'taxi-dark': '#282c34',
+                        'taxi-gray': '#4b5563',
+                        'taxi-blue': '#4a77c5',
+                        'taxi-light': '#e5e7de'
+                    }
+                }
+            }
+        }
+    </script>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
@@ -32,5 +47,77 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer id="contact" class="bg-[#f9d71c] text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-taxi-yellow text-2xl font-bold mr-2">
+                            <i class="fas fa-taxi"></i>
+                        </span>
+                        <span class="text-2xl font-bold">GrandTaxiGo</span>
+                    </div>
+                    <p class="text-gray-400">La solution innovante pour la réservation de grands taxis interurbains au Maroc.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-[#4b5563] transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#4b5563] transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#4b5563] transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#4b5563] transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Services</a></li>
+                        <li><a href="#fonctionnement" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Comment ça marche</a></li>
+                        <li><a href="#temoignages" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Témoignages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Légal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-taxi-yellow transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-taxi-yellow"></i>
+                            <span class="text-gray-400">123 Avenue Mohammed V, Casablanca</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-taxi-yellow"></i>
+                            <span class="text-gray-400">+212 522 123 456</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-taxi-yellow"></i>
+                            <span class="text-gray-400">contact@grandtaxigo.ma</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 GrandTaxiGo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
     </body>
 </html>
