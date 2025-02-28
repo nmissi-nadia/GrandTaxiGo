@@ -15,6 +15,7 @@ class Trajet extends Model
         'statut',
         'heure_depart',
         'places_disponibles',
+        'prix',
     ];
 
     public function chauffeur()

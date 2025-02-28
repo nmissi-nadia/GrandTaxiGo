@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="container mx-auto p-4">
-    <!-- Section d'accueil avec touche humaine -->
+   
     <div class="bg-yellow-300 shadow-md rounded-lg p-6 mb-6 text-center">
       <h1 class="text-3xl font-bold text-gray-800 mb-2">Bonjour, {{ Auth::user()->name }} !</h1>
       <p class="text-gray-700 italic">"Voyager, c'est la seule chose qu'on achète et qui nous rend plus riche."</p>
@@ -11,11 +11,11 @@
       <h2 class="text-2xl font-bold mb-4 text-gray-800">Votre tableau de bord en tant que passager</h2>
       <p class="mb-4 text-gray-700">Accédez rapidement à vos fonctionnalités principales ci-dessous.</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <a href="/passager/reservations" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105">
           Mes Réservations
         </a>
-        <a href="" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105">
+        <a href="/trajets" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105">
           Trajets Disponibles
         </a>
         <a href="" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105">

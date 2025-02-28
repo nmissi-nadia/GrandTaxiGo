@@ -24,14 +24,11 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <!-- Navigation -->
-    <nav class="bg-taxi-dark text-white shadow-lg fixed w-full z-10">
+    <nav class="bg-gradient-to-r from-gray-400 via-gray-900 to-taxi-dark text-white shadow-lg fixed w-full z-10">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <span class="text-taxi-yellow text-2xl font-bold mr-2">
-                        <i class="fas fa-taxi"></i>
-                    </span>
-                    <span class="text-2xl font-bold">GrandTaxiGo</span>
+                <img src="{{ asset('storage/img/logotx.png') }}" alt="Logo" class="h-20 w-auto mx-auto object-contain" />
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
@@ -51,6 +48,62 @@
                             >
                                 Dashboard
                             </a>
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                <x-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 dark:bg-gray-800 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition duration-150 ease-in-out">
+                                            <div>{{ Auth::user()->name }}</div>
+
+                                            <div class="ml-1">
+                                                <svg class="fill-current h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+
+                                    <x-slot name="content">
+                                        <x-dropdown-link :href="route('profile.edit')" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            {{ __('Profile') }}
+                                        </x-dropdown-link>
+
+                                        <!-- Authentication -->
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <x-dropdown-link :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();" class="hover:bg-red-100 dark:hover:bg-red-700">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </x-slot>
+                                </x-dropdown>
+                        </div>
+                           <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->email }}</div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('profile.edit')" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                    {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();" class="hover:bg-red-100 dark:hover:bg-red-700">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+            </div>
+        </div>
                         @else
                     <a
                                 href="{{ route('login') }}"
@@ -100,55 +153,12 @@
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Réservez votre Grand Taxi <span class="text-taxi-yellow">en quelques clics</span></h1>
                 <p class="text-lg mb-8">La solution simple et efficace pour vos trajets interurbains. Trouvez un chauffeur disponible pour votre destination et voyagez sereinement.</p>
                 
-                <div class="bg-white rounded-lg p-6 shadow-lg">
-                    <h3 class="text-taxi-dark text-xl font-bold mb-4">Réserver un trajet</h3>
-                    <form class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="departure" class="block text-taxi-gray font-medium mb-2">Lieu de départ</label>
-                                <select id="departure" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-taxi-yellow">
-                                    <option value="">Sélectionnez une ville</option>
-                                    <option value="casablanca">Casablanca</option>
-                                    <option value="rabat">Rabat</option>
-                                    <option value="marrakech">Marrakech</option>
-                                    <option value="fes">Fès</option>
-                                    <option value="tanger">Tanger</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="destination" class="block text-taxi-gray font-medium mb-2">Destination</label>
-                                <select id="destination" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-taxi-yellow">
-                                    <option value="">Sélectionnez une ville</option>
-                                    <option value="casablanca">Casablanca</option>
-                                    <option value="rabat">Rabat</option>
-                                    <option value="marrakech">Marrakech</option>
-                                    <option value="fes">Fès</option>
-                                    <option value="tanger">Tanger</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="date" class="block text-taxi-gray font-medium mb-2">Date et heure</label>
-                            <input type="datetime-local" id="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-taxi-yellow">
-                        </div>
-                        <div>
-                            <label for="passengers" class="block text-taxi-gray font-medium mb-2">Nombre de places</label>
-                            <select id="passengers" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-taxi-yellow">
-                                <option value="1">1 place</option>
-                                <option value="2">2 places</option>
-                                <option value="3">3 places</option>
-                                <option value="4">4 places</option>
-                                <option value="5">5 places</option>
-                                <option value="6">6 places (taxi complet)</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-taxi-yellow text-taxi-dark font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition duration-300">Rechercher</button>
-                    </form>
-                </div>
+                
             </div>
             
             <div class="md:w-1/2 md:pl-12">
-                <img src="/api/placeholder/600/400" alt="Grand Taxi" class="rounded-lg shadow-xl">
+            <img src="{{ asset('storage/img/txi.jpg') }}" alt="Grand Taxi" class="rounded-lg shadow-xl w-full max-w-4xl">
+
             </div>
         </div>
     </header>

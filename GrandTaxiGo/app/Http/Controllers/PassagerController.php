@@ -43,7 +43,7 @@ class PassagerController extends Controller
     // Afficher les réservations du passager
     public function reservations()
     {
-        $reservations = Reservation::where('passager_id', auth()->id())->get();
+        $reservations = Reservation::with('passager','trajet')->where('passager_id', auth()->id())->get();
         return view('passager.mesreservation', compact('reservations'));
     }
 

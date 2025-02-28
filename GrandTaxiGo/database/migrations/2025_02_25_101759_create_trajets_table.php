@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('statut', ['actif', 'terminé'])->default('actif');
             $table->dateTime('heure_depart');
             $table->integer('places_disponibles');
+            $table->decimal('prix', 10, 2);
             $table->timestamps();
         });
     }

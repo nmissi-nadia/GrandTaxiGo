@@ -5,14 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trajet;
 use App\Models\Reservation;
-
+use Carbon\Carbon;
+use App\Models\User;
 class ChauffeurController extends Controller
 {
     // Afficher les trajets du chauffeur
-    public function mesTrajets()
+    public function index()
     {
         $trajets = Trajet::where('chauffeur_id', auth()->id())->get();
-        return view('chauffeur.trajets.index', compact('trajets'));
+        $totalTrajets = Trajet::count();
+        $activeTrajets = Trajet::where('statut', 'actif')->count();
+        $completedTrajets = Trajet::where('statut', 'terminé')->count();
+        $totalRevenue = Trajet::sum('prix');
+        
+        $nombreReservations = Reservation::whereHas('trajet', function ($query) {
+            $query->where('chauffeur_id', auth()->id());
+        })
+        ->whereDate('created_at', Carbon::today())
+        ->count();
+        $reservations = Reservation::whereHas('trajet', function ($query) {
+            $query->where('chauffeur_id', auth()->id());
+        })->get();
+        return view('chauffeur.index', compact('trajets','nombreReservations','totalRevenue','totalTrajets','activeTrajets','completedTrajets','reservations'));
     }
 
     // Créer un nouveau trajet
@@ -84,4 +98,20 @@ class ChauffeurController extends Controller
 
         return back()->with('success', 'Statut de la réservation mis à jour.');
     }
+
+    // Supprimer une réservation
+    public function supprimerReservation($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+        return back()->with('success', 'Réservation supprimée avec succès.');
+    }
+    // change dispo
+    public function updateDisponibilite($id){
+        $user = User::findOrFail($id);
+        $user->disponible=!$user->disponible;
+        $user->save();
+        return back()->with('success', 'Statut mis à jour avec succès.');
+    }
+    
 }
